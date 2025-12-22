@@ -17,6 +17,23 @@ interface Project {
 const projectsData: Project[] = [
   {
     id: 'project-1',
+    name: 'HeadsUp - Campus Placement Alert App',
+    purpose: 'Real-time campus placement and internship notifications for students',
+    tags: ['Next.js', 'Python', 'Web Scraping', 'Gmail API', 'Cron Jobs'],
+    problem: 'CDC placement/internship notifications were posted on ERP noticeboard with significant delays, causing students to miss important opportunities. Manual checking was time-consuming and inefficient.',
+    architecture: 'Automated notification system with Python scraper running as cron job, Gmail API for ERP session re-authentication, Next.js frontend for real-time notice display. Scraper posts notices.json to Next.js app for instant rendering.',
+    dataFlow: 'Cron Job → Python Scraper → ERP Portal → Gmail API Re-auth → notices.json → Next.js App → Real-time Display',
+    tradeoffs: [
+      'Used cron jobs for scheduled scraping instead of real-time webhooks (ERP limitation)',
+      'Implemented Gmail API for automatic re-authentication when ERP session expires',
+      'Chose Next.js for fast static generation and real-time data updates',
+      'Stored notices as JSON for lightweight data transfer between scraper and frontend',
+      'Balanced scraping frequency to avoid rate limiting while maintaining freshness'
+    ],
+    outcome: 'Deployed to production with 300+ active users. Eliminated notification delays, ensuring students never miss placement opportunities. Became the go-to platform for campus recruitment updates.'
+  },
+  {
+    id: 'project-2',
     name: 'Custom User-Level Thread Library for Linux',
     purpose: 'Built a thread library from scratch for efficient concurrent execution',
     tags: ['C', 'Operating Systems', 'Multithreading', 'System Calls'],
@@ -32,7 +49,7 @@ const projectsData: Project[] = [
     outcome: 'Successfully implemented a fully functional thread library with mutex support, preventing deadlocks and ensuring thread-safe concurrent execution.'
   },
   {
-    id: 'project-2',
+    id: 'project-3',
     name: 'Advanced Question Search Engine',
     purpose: 'Efficient information retrieval using TF-IDF algorithm',
     tags: ['Python', 'NLP', 'Web Scraping', 'BeautifulSoup', 'Selenium'],
