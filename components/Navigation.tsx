@@ -1,11 +1,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useTheme } from './ThemeProvider';
 
 export default function Navigation() {
   const [activeSection, setActiveSection] = useState('');
   const [scrolled, setScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,7 +19,7 @@ export default function Navigation() {
       setScrollProgress(Math.min(100, Math.max(0, progress)));
 
       // Update active section based on scroll position with improved detection
-      const sections = ['hero', 'projects', 'decisions', 'experience', 'contact'];
+      const sections = ['hero', 'projects', 'experience', 'contact'];
 
       // Find section that is most visible in viewport
       let maxVisibility = 0;
@@ -55,7 +57,6 @@ export default function Navigation() {
   const navItems = [
     { id: 'hero', label: 'Home' },
     { id: 'projects', label: 'Projects' },
-    { id: 'decisions', label: 'Decisions' },
     { id: 'experience', label: 'Experience' },
     { id: 'contact', label: 'Contact' },
   ];
@@ -90,7 +91,7 @@ export default function Navigation() {
               HT
             </a>
 
-            {/* Navigation links */}
+            {/* Navigation links and theme toggle */}
             <div className="hidden md:flex items-center gap-1">
               {navItems.map((item) => (
                 <a
@@ -105,10 +106,46 @@ export default function Navigation() {
                   {item.label}
                 </a>
               ))}
+
+              {/* Dark mode toggle */}
+              <button
+                onClick={toggleTheme}
+                className="ml-2 p-2 rounded-sm text-[var(--muted)] hover:text-[var(--foreground)]
+                         hover:bg-[var(--accent-light)]/50 transition-all duration-200"
+                aria-label="Toggle theme"
+              >
+                {theme === 'dark' ? (
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                  </svg>
+                ) : (
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                  </svg>
+                )}
+              </button>
             </div>
 
-            {/* Mobile menu button */}
-            <MobileMenu navItems={navItems} activeSection={activeSection} />
+            {/* Mobile menu button and theme toggle */}
+            <div className="md:hidden flex items-center gap-2">
+              {/* Dark mode toggle (mobile) */}
+              <button
+                onClick={toggleTheme}
+                className="p-2 text-[var(--foreground)] hover:text-[var(--accent)] transition-colors"
+                aria-label="Toggle theme"
+              >
+                {theme === 'dark' ? (
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                  </svg>
+                ) : (
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                  </svg>
+                )}
+              </button>
+              <MobileMenu navItems={navItems} activeSection={activeSection} />
+            </div>
           </div>
         </div>
       </nav>
