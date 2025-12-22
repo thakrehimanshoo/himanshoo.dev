@@ -70,7 +70,7 @@ export default function EngineeringDecisions() {
   };
 
   return (
-    <section className="py-24 px-6 bg-[var(--background)]">
+    <section id="decisions" className="py-24 px-6 bg-[var(--background)] scroll-mt-16">
       <div className="max-w-5xl mx-auto">
         {/* Section header */}
         <div className="mb-16">

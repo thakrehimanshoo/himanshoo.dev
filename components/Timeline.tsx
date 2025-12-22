@@ -81,7 +81,7 @@ export default function Timeline() {
   };
 
   return (
-    <section className="py-24 px-6 bg-[var(--card-bg)]">
+    <section id="experience" className="py-24 px-6 bg-[var(--card-bg)] scroll-mt-16">
       <div className="max-w-5xl mx-auto">
         {/* Section header */}
         <div className="mb-16">

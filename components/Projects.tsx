@@ -70,7 +70,7 @@ export default function Projects() {
   };
 
   return (
-    <section id="projects" className="min-h-screen py-24 px-6">
+    <section id="projects" className="min-h-screen py-24 px-6 scroll-mt-16">
       <div className="max-w-6xl mx-auto">
         {/* Section header */}
         <div className="mb-16">
