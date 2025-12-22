@@ -16,17 +16,35 @@ export default function Navigation() {
       const progress = (window.scrollY / totalHeight) * 100;
       setScrollProgress(Math.min(100, Math.max(0, progress)));
 
-      // Update active section based on scroll position
+      // Update active section based on scroll position with improved detection
       const sections = ['hero', 'projects', 'decisions', 'experience', 'contact'];
-      const current = sections.find(section => {
-        const element = document.getElementById(section);
+
+      // Find section that is most visible in viewport
+      let maxVisibility = 0;
+      let mostVisibleSection = 'hero';
+
+      sections.forEach(sectionId => {
+        const element = document.getElementById(sectionId);
         if (element) {
           const rect = element.getBoundingClientRect();
-          return rect.top <= 100 && rect.bottom >= 100;
+          const viewportHeight = window.innerHeight;
+
+          // Calculate how much of the section is visible
+          const visibleTop = Math.max(0, Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0));
+          const visibility = visibleTop / viewportHeight;
+
+          // Prioritize sections near the top of viewport
+          const topBonus = rect.top < 100 && rect.top > -100 ? 0.3 : 0;
+          const totalScore = visibility + topBonus;
+
+          if (totalScore > maxVisibility) {
+            maxVisibility = totalScore;
+            mostVisibleSection = sectionId;
+          }
         }
-        return false;
       });
-      if (current) setActiveSection(current);
+
+      setActiveSection(mostVisibleSection);
     };
 
     window.addEventListener('scroll', handleScroll);

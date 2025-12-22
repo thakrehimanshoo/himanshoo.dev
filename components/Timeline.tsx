@@ -16,59 +16,41 @@ interface Experience {
 const experienceData: Experience[] = [
   {
     id: 'exp-1',
-    title: 'Senior Full-Stack Engineer',
-    company: 'Tech Corp',
-    period: '2022 - Present',
+    title: 'Full Stack Developer Intern',
+    company: 'Insteasy',
+    period: 'May 2025 - Jul 2025',
     location: 'Remote',
-    summary: 'Lead engineering for core platform services',
+    summary: 'Developing full-stack solutions with modern web technologies',
     responsibilities: [
-      'Architected and built distributed task queue processing 50K+ jobs/hour',
-      'Led migration from monolith to microservices architecture',
-      'Implemented real-time analytics dashboard with WebSocket infrastructure',
-      'Mentored team of 4 junior engineers on system design and code quality'
+      'Increased subscription conversion by 35% by integrating PayPal Gateway via REST APIs, ensuring seamless transactions and security',
+      'Boosted visibility and lead generation by 15% by developing a marketing website using ReactJS, hosted on Hostinger with optimized SEO',
+      'Improved efficiency and accelerated task release by 20% by implementing I/O-driven plugins on monday.com, integrating Google apps in monorepo architecture',
+      'Enhanced workflow efficiency by deploying embeddings-based plugins on monday.com, integrating Google apps in monorepo architecture'
     ],
     impact: [
-      'Reduced infrastructure costs by 40% through system optimization',
-      'Improved API response time from 800ms to 120ms average',
-      'Decreased system downtime by 85% with better monitoring and alerts'
+      '35% increase in subscription conversion through PayPal integration',
+      '15% boost in visibility and lead generation with SEO-optimized marketing site',
+      '20% faster task release with improved workflow automation'
     ]
   },
   {
     id: 'exp-2',
-    title: 'Full-Stack Developer',
-    company: 'StartupXYZ',
-    period: '2020 - 2022',
+    title: 'Full Stack Developer Intern',
+    company: 'Insteasy',
+    period: 'May 2024 - Jul 2024',
     location: 'Remote',
-    summary: 'Built product features and scaled backend systems',
+    summary: 'Built and optimized full-stack web applications',
     responsibilities: [
-      'Developed REST APIs serving 100K+ daily active users',
-      'Built frontend features with React and TypeScript',
-      'Implemented rate limiting and API security middleware',
-      'Optimized PostgreSQL queries reducing load times by 60%'
+      'Increased net load speed by 25% and strengthened UI consistency by refactoring and redesigning the dashboard using Angular and Ionic',
+      'Reduced server response time by 15% and enhanced core system performance by developing and optimizing reusable REST API endpoints',
+      'Lowered user drop-off rate by 20% and streamlined seamless onboarding by implementing OAuth for third-party login, boosting security',
+      'Ensured a reliable, scalable, and secure environment by deploying the application on Heroku, streamlining smooth deployment processes'
     ],
     impact: [
-      'Shipped 15+ major features supporting company growth from 10K to 100K users',
-      'Reduced API abuse incidents to zero with rate limiting system',
-      'Improved test coverage from 40% to 85% for critical services'
-    ]
-  },
-  {
-    id: 'exp-3',
-    title: 'Junior Developer',
-    company: 'Digital Agency',
-    period: '2018 - 2020',
-    location: 'On-site',
-    summary: 'Web development for client projects',
-    responsibilities: [
-      'Built responsive websites and web applications',
-      'Collaborated with designers to implement pixel-perfect UIs',
-      'Integrated third-party APIs and payment systems',
-      'Maintained and debugged existing client codebases'
-    ],
-    impact: [
-      'Delivered 20+ client projects on time and within budget',
-      'Reduced page load times by 50% through performance optimization',
-      'Established testing practices adopted across development team'
+      '25% improvement in load speed with UI refactoring using Angular and Ionic',
+      '15% reduction in server response time through optimized REST APIs',
+      '20% decrease in user drop-off with OAuth implementation',
+      'Reliable deployment pipeline established on Heroku'
     ]
   }
 ];

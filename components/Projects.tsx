@@ -17,48 +17,35 @@ interface Project {
 const projectsData: Project[] = [
   {
     id: 'project-1',
-    name: 'Distributed Task Queue System',
-    purpose: 'High-throughput job processing for microservices',
-    tags: ['Node.js', 'Redis', 'PostgreSQL', 'Docker'],
-    problem: 'Multiple services needed async task processing with guaranteed delivery and retry logic. Existing solutions introduced vendor lock-in.',
-    architecture: 'Event-driven architecture with Redis pub/sub for job distribution, PostgreSQL for state management, and worker pools for execution.',
-    dataFlow: 'API Gateway → Job Publisher → Redis Queue → Worker Pool → State Store → Result Consumer',
+    name: 'Custom User-Level Thread Library for Linux',
+    purpose: 'Built a thread library from scratch for efficient concurrent execution',
+    tags: ['C', 'Operating Systems', 'Multithreading', 'System Calls'],
+    problem: 'Need for a lightweight, user-level thread library supporting creation, termination, and synchronization without relying on existing pthread implementations.',
+    architecture: 'User-level thread library using clone() system call with support for thread creation, join, termination, mutexes, and barriers. Implemented thread-safe synchronization using TIDs.',
+    dataFlow: 'Thread Creation → clone() syscall → Thread Pool Management → Synchronization Primitives → Join/Exit',
     tradeoffs: [
-      'Chose Redis over RabbitMQ for lower latency at scale',
-      'Implemented custom retry logic instead of using Sidekiq to maintain Node.js stack',
-      'Traded immediate consistency for eventual consistency to improve throughput'
+      'Used clone() system call directly for fine-grained control over thread creation',
+      'Implemented custom synchronization primitives instead of relying on kernel-level locks',
+      'Designed thread termination routines (foothread_exit) for clean joinable thread management',
+      'Validated library with tree recursion tests for correctness in parallel and sequential execution'
     ],
-    outcome: 'Processing 50K+ jobs/hour with 99.9% reliability. Reduced infrastructure costs by 40%.'
+    outcome: 'Successfully implemented a fully functional thread library with mutex support, preventing deadlocks and ensuring thread-safe concurrent execution.'
   },
   {
     id: 'project-2',
-    name: 'Real-time Analytics Dashboard',
-    purpose: 'Live metrics visualization for production monitoring',
-    tags: ['React', 'WebSocket', 'TimescaleDB', 'Go'],
-    problem: 'Engineering team needed real-time visibility into system health metrics without overwhelming the database.',
-    architecture: 'Go backend with WebSocket server, TimescaleDB for time-series data, React frontend with efficient re-rendering strategy.',
-    dataFlow: 'Metrics Collector → TimescaleDB → Aggregation Service → WebSocket → Frontend Dashboard',
+    name: 'Advanced Question Search Engine',
+    purpose: 'Efficient information retrieval using TF-IDF algorithm',
+    tags: ['Python', 'NLP', 'Web Scraping', 'BeautifulSoup', 'Selenium'],
+    problem: 'Need for an intelligent search engine to efficiently retrieve relevant questions from large datasets with high precision.',
+    architecture: 'Search engine using Term Frequency-Inverse Document Frequency (TF-IDF) algorithm for ranking, automated web scraping for data collection, dynamic Flask-based interface with HTML/CSS/JavaScript frontend.',
+    dataFlow: 'Web Scraping (Selenium/BeautifulSoup) → Data Processing → TF-IDF Ranking → Flask API → Frontend Interface',
     tradeoffs: [
-      'Used WebSocket instead of SSE for bidirectional communication needs',
-      'Implemented data sampling at high frequencies to reduce bandwidth',
-      'Chose TimescaleDB over Prometheus for complex querying requirements'
+      'Chose TF-IDF over simple keyword matching for better relevance ranking',
+      'Used Selenium for dynamic content scraping where BeautifulSoup was insufficient',
+      'Implemented Flask backend for lightweight, fast API responses',
+      'Optimized search algorithm for handling 2400+ problems from LeetCode efficiently'
     ],
-    outcome: 'Real-time monitoring with <100ms latency. Helped reduce MTTR by 60%.'
-  },
-  {
-    id: 'project-3',
-    name: 'API Rate Limiter Middleware',
-    purpose: 'Protect services from abuse and ensure fair resource allocation',
-    tags: ['Express', 'Redis', 'TypeScript'],
-    problem: 'APIs experienced traffic spikes causing cascading failures. Needed distributed rate limiting across multiple instances.',
-    architecture: 'Token bucket algorithm with Redis-backed counter, sliding window for burst handling, configurable per-endpoint limits.',
-    dataFlow: 'Request → Rate Limit Check → Redis Counter → Allow/Deny → Endpoint Handler',
-    tradeoffs: [
-      'Implemented token bucket over leaky bucket for better burst handling',
-      'Chose Redis over in-memory cache for consistency across instances',
-      'Added complexity with sliding windows but gained more accurate limiting'
-    ],
-    outcome: 'Eliminated API abuse incidents. Improved system stability under load by 85%.'
+    outcome: 'Achieved reliable, high-precision data extraction at scale with an optimized search interface enhancing user experience.'
   }
 ];
 

@@ -50,7 +50,7 @@ export default function Hero() {
 
           {/* Tech stack quick view */}
           <div className="flex flex-wrap gap-2 pt-2">
-            {['TypeScript', 'React', 'Node.js', 'PostgreSQL', 'Docker'].map((tech) => (
+            {['TypeScript', 'React', 'Angular', 'Node.js', 'Python', 'PostgreSQL', 'MongoDB'].map((tech) => (
               <span
                 key={tech}
                 className="px-3 py-1 text-xs font-mono text-[var(--muted)] bg-[var(--card-bg)]
