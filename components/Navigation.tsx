@@ -21,6 +21,14 @@ export default function Navigation() {
       // Update active section based on scroll position with improved detection
       const sections = ['hero', 'projects', 'experience', 'contact'];
 
+      // Check if we're at the bottom of the page (for contact section)
+      const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 10;
+
+      if (isAtBottom) {
+        setActiveSection('contact');
+        return;
+      }
+
       // Find section that is most visible in viewport
       let maxVisibility = 0;
       let mostVisibleSection = 'hero';

@@ -29,11 +29,11 @@ export default function Footer() {
               Email
             </div>
             <a
-              href="mailto:himanshoo@example.com"
+              href="mailto:thakrehimanshoo@gmail.com"
               className="text-[var(--foreground)] hover:text-[var(--accent)] transition-colors
                        inline-block"
             >
-              himanshoo@example.com
+              thakrehimanshoo@gmail.com
             </a>
           </div>
 
@@ -44,7 +44,7 @@ export default function Footer() {
             </div>
             <div className="flex gap-6">
               <a
-                href="https://github.com/himanshoo"
+                href="https://github.com/thakrehimanshoo"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[var(--foreground)] hover:text-[var(--accent)] transition-colors
@@ -56,7 +56,7 @@ export default function Footer() {
                 <span>GitHub</span>
               </a>
               <a
-                href="https://linkedin.com/in/himanshoo-thakre"
+                href="https://www.linkedin.com/in/thakrehimanshoo"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[var(--foreground)] hover:text-[var(--accent)] transition-colors

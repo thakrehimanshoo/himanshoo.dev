@@ -80,7 +80,7 @@ export default function Timeline() {
         </div>
 
         {/* Timeline */}
-        <div className="relative">
+        <div className="relative mb-20">
           {/* Vertical line */}
           <div className="absolute left-0 top-0 bottom-0 w-px bg-[var(--border)]"></div>
 
@@ -92,9 +92,56 @@ export default function Timeline() {
                 experience={exp}
                 isExpanded={expandedId === exp.id}
                 onToggle={() => toggleExpand(exp.id)}
-                isLast={index === experienceData.length - 1}
+                isLast={false}
               />
             ))}
+          </div>
+        </div>
+
+        {/* Education Section */}
+        <div className="mb-12">
+          <div className="flex items-center gap-2 text-sm text-[var(--muted)] mb-6">
+            <span className="opacity-60">/</span>
+            <span>Education</span>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-light text-[var(--foreground)] mb-8">
+            Academic Background
+          </h2>
+        </div>
+
+        {/* Education Card */}
+        <div className="relative pl-8">
+          {/* Timeline dot */}
+          <div className="absolute left-0 top-2 w-2 h-2 -translate-x-[3.5px] bg-[var(--accent)] rounded-full
+                      ring-4 ring-[var(--card-bg)]"></div>
+
+          <div className="bg-[var(--background)] border border-[var(--border)] rounded-sm p-6
+                       hover:border-[var(--border-hover)] hover:shadow-[0_2px_8px_var(--shadow-md)]
+                       transition-all duration-200">
+            <div className="space-y-3">
+              <div className="flex flex-wrap items-center gap-2">
+                <h3 className="text-lg font-medium text-[var(--foreground)]">
+                  B.Tech (Hons.) in Chemical Engineering
+                </h3>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-[var(--foreground)] font-medium">IIT Kharagpur</span>
+                <span className="text-[var(--muted)]">•</span>
+                <span className="text-sm text-[var(--muted)]">2021 - 2025</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-[var(--muted)]">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                </svg>
+                <span>M.Tech Dual Degree (5Y)</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-[var(--muted)] pt-2">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                <span>CGPA: 7.49/10</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
