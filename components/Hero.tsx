@@ -10,7 +10,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center px-6 pt-16 relative overflow-hidden">
+    <section id="hero" className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-20 sm:pt-16 relative overflow-hidden">
       {/* Background grid */}
       <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
         <div className="absolute inset-0" style={{
@@ -20,30 +20,30 @@ export default function Hero() {
       </div>
 
       <div className="max-w-4xl w-full relative z-10">
-        <div className={`space-y-8 transition-all duration-1000 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+        <div className={`space-y-6 sm:space-y-8 transition-all duration-1000 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
           {/* Status indicator */}
-          <div className="flex items-center gap-2 text-sm text-[var(--muted)]">
+          <div className="flex items-center gap-2 text-xs sm:text-sm text-[var(--muted)] flex-wrap">
             <div className="w-2 h-2 bg-[var(--accent)] rounded-full animate-pulse"></div>
             <span className="font-mono">System Active</span>
-            <span className="opacity-40">•</span>
-            <span className="opacity-60 font-mono">{new Date().toLocaleTimeString('en-US', { hour12: false })}</span>
+            <span className="opacity-40 hidden sm:inline">•</span>
+            <span className="opacity-60 font-mono hidden sm:inline">{new Date().toLocaleTimeString('en-US', { hour12: false })}</span>
           </div>
 
           {/* Name and role */}
-          <div className="space-y-4">
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-light tracking-tight text-[var(--foreground)] leading-none">
+          <div className="space-y-3 sm:space-y-4">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light tracking-tight text-[var(--foreground)] leading-none break-words">
               Himanshoo Thakre
             </h1>
             <div className="flex items-center gap-3">
-              <div className="h-px w-12 bg-[var(--accent)]"></div>
-              <p className="text-xl md:text-2xl text-[var(--muted)] font-light">
+              <div className="h-px w-8 sm:w-12 bg-[var(--accent)]"></div>
+              <p className="text-lg sm:text-xl md:text-2xl text-[var(--muted)] font-light">
                 Full-Stack Developer
               </p>
             </div>
           </div>
 
           {/* Tagline */}
-          <p className="text-lg md:text-xl text-[var(--foreground)] max-w-2xl leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-[var(--foreground)] max-w-2xl leading-relaxed">
             Building production systems with thoughtful architecture.
             I solve complex problems through clean code and pragmatic engineering decisions.
           </p>
@@ -63,12 +63,12 @@ export default function Hero() {
           </div>
 
           {/* CTA buttons */}
-          <div className="flex flex-wrap gap-4 pt-4">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 pt-4">
             <a
               href="#projects"
               className="px-6 py-3 bg-[var(--foreground)] text-[var(--background)]
                        rounded-sm hover:scale-105 transition-all duration-200
-                       hover:shadow-lg font-medium"
+                       hover:shadow-lg font-medium text-center sm:text-left text-sm sm:text-base"
             >
               View Work
             </a>
@@ -76,7 +76,7 @@ export default function Hero() {
               href="#contact"
               className="px-6 py-3 border border-[var(--border)] text-[var(--foreground)]
                        rounded-sm hover:border-[var(--accent)] hover:bg-[var(--accent-light)]
-                       transition-all duration-200 font-medium"
+                       transition-all duration-200 font-medium text-center sm:text-left text-sm sm:text-base"
             >
               Get in Touch
             </a>
@@ -84,7 +84,7 @@ export default function Hero() {
               href="/resume.pdf"
               className="px-6 py-3 border border-[var(--border)] text-[var(--foreground)]
                        rounded-sm hover:border-[var(--border-hover)] hover:bg-[var(--card-bg)]
-                       transition-all duration-200 font-medium flex items-center gap-2"
+                       transition-all duration-200 font-medium flex items-center justify-center sm:justify-start gap-2 text-sm sm:text-base"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -94,22 +94,24 @@ export default function Hero() {
           </div>
 
           {/* Metadata */}
-          <div className="pt-8 flex flex-wrap gap-6 text-sm text-[var(--muted)]">
+          <div className="pt-6 sm:pt-8 flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-6 text-xs sm:text-sm text-[var(--muted)]">
             <div className="flex items-center gap-2">
-              <svg className="w-4 h-4 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-3 h-3 sm:w-4 sm:h-4 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
               <span className="opacity-60">Location:</span> Remote
             </div>
             <div className="flex items-center gap-2">
-              <svg className="w-4 h-4 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-3 h-3 sm:w-4 sm:h-4 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
-              <span className="opacity-60">Last Deploy:</span> {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+              <span className="opacity-60">Last Deploy:</span>
+              <span className="hidden sm:inline">{new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+              <span className="sm:hidden">{new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</span>
             </div>
             <div className="flex items-center gap-2">
-              <svg className="w-4 h-4 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-3 h-3 sm:w-4 sm:h-4 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               <span className="opacity-60">Status:</span> Available for Work
