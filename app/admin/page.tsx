@@ -22,6 +22,7 @@ export default function AdminDashboard() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchPosts();
@@ -40,9 +41,10 @@ export default function AdminDashboard() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this post?')) return;
+    if (!confirm('Are you sure you want to delete this post? This action cannot be undone.')) return;
 
     setDeleting(id);
+    setError(null);
     try {
       const res = await fetch(`/api/posts/${id}`, {
         method: 'DELETE',
@@ -51,17 +53,19 @@ export default function AdminDashboard() {
       if (res.ok) {
         setPosts(posts.filter(post => post.id !== id));
       } else {
-        alert('Failed to delete post');
+        const data = await res.json().catch(() => ({ error: 'Unknown error' }));
+        setError(data.error || 'Failed to delete post. Please try again.');
       }
     } catch (error) {
       console.error('Error deleting post:', error);
-      alert('Error deleting post');
+      setError('Network error. Please check your connection and try again.');
     } finally {
       setDeleting(null);
     }
   };
 
   const togglePublish = async (post: Post) => {
+    setError(null);
     try {
       const res = await fetch(`/api/posts/${post.id}`, {
         method: 'PUT',
@@ -72,9 +76,13 @@ export default function AdminDashboard() {
       if (res.ok) {
         const updated = await res.json();
         setPosts(posts.map(p => p.id === post.id ? updated : p));
+      } else {
+        const data = await res.json().catch(() => ({ error: 'Unknown error' }));
+        setError(data.error || 'Failed to update post status. Please try again.');
       }
     } catch (error) {
       console.error('Error updating post:', error);
+      setError('Network error. Please check your connection and try again.');
     }
   };
 
@@ -120,6 +128,13 @@ export default function AdminDashboard() {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-6 py-8">
+        {/* Error Message */}
+        {error && (
+          <div className="bg-red-500/10 border border-red-500/50 text-red-600 dark:text-red-400 px-4 py-3 rounded-md mb-6">
+            <p className="text-sm font-medium">{error}</p>
+          </div>
+        )}
+
         {/* Actions */}
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-semibold text-foreground">

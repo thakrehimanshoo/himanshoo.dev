@@ -23,6 +23,7 @@ export default function TipTapEditor({ content, onChange }: TipTapEditorProps) {
       }),
     ],
     content,
+    immediatelyRender: false, // Fix SSR hydration error
     onUpdate: ({ editor }) => {
       onChange(editor.getHTML());
     },

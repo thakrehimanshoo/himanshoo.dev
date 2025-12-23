@@ -17,6 +17,7 @@ export default function EditPostPage({ params }: { params: { id: string } }) {
   const [published, setPublished] = useState(false);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (id !== 'new') {
@@ -48,15 +49,43 @@ export default function EditPostPage({ params }: { params: { id: string } }) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
+
+    // Validation
+    if (!title.trim()) {
+      setError('Title is required');
+      return;
+    }
+    if (!slug.trim()) {
+      setError('Slug is required');
+      return;
+    }
+    if (!description.trim()) {
+      setError('Description is required');
+      return;
+    }
+    if (!content.trim()) {
+      setError('Content is required');
+      return;
+    }
+    if (!tags.trim()) {
+      setError('At least one tag is required');
+      return;
+    }
+    if (!readingTime.trim()) {
+      setError('Reading time is required');
+      return;
+    }
+
     setSaving(true);
 
     const postData = {
-      title,
-      slug,
-      description,
+      title: title.trim(),
+      slug: slug.trim(),
+      description: description.trim(),
       content,
       tags: tags.split(',').map(t => t.trim()).filter(Boolean).join(','),
-      readingTime,
+      readingTime: readingTime.trim(),
       published,
     };
 
@@ -74,11 +103,21 @@ export default function EditPostPage({ params }: { params: { id: string } }) {
         router.push('/admin');
         router.refresh();
       } else {
-        alert('Failed to save post');
+        const data = await res.json().catch(() => ({ error: 'Unknown error' }));
+
+        if (res.status === 401) {
+          setError('You are not authorized. Please login again.');
+        } else if (res.status === 400) {
+          setError(data.error || 'Validation failed. Please check your inputs.');
+        } else if (res.status === 500 && data.error?.includes('Unique constraint')) {
+          setError('A post with this slug already exists. Please use a different slug.');
+        } else {
+          setError(data.error || 'Failed to save post. Please try again.');
+        }
       }
     } catch (error) {
       console.error('Error saving post:', error);
-      alert('Error saving post');
+      setError('Network error. Please check your connection and try again.');
     } finally {
       setSaving(false);
     }
@@ -122,6 +161,13 @@ export default function EditPostPage({ params }: { params: { id: string } }) {
       {/* Form */}
       <main className="max-w-5xl mx-auto px-6 py-8">
         <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Error Message */}
+          {error && (
+            <div className="bg-red-500/10 border border-red-500/50 text-red-600 dark:text-red-400 px-4 py-3 rounded-md">
+              <p className="text-sm font-medium">{error}</p>
+            </div>
+          )}
+
           {/* Title */}
           <div>
             <label htmlFor="title" className="block text-sm font-medium text-foreground mb-2">
