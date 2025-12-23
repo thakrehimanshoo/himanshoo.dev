@@ -18,9 +18,9 @@ const postSchema = z.object({
 // GET /api/posts/[id] - Get single post
 export async function GET(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
-  const { id } = await params;
+  const { id } = params;
 
   const post = await prisma.post.findUnique({
     where: { id },
@@ -48,7 +48,7 @@ export async function GET(
 // PUT /api/posts/[id] - Update post (requires auth)
 export async function PUT(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   const session = await getServerSession(authOptions);
 
@@ -59,7 +59,7 @@ export async function PUT(
     );
   }
 
-  const { id } = await params;
+  const { id } = params;
 
   try {
     const body = await request.json();
@@ -99,7 +99,7 @@ export async function PUT(
 // DELETE /api/posts/[id] - Delete post (requires auth)
 export async function DELETE(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   const session = await getServerSession(authOptions);
 
@@ -110,7 +110,7 @@ export async function DELETE(
     );
   }
 
-  const { id } = await params;
+  const { id } = params;
 
   try {
     await prisma.post.delete({

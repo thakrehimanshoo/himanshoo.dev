@@ -5,9 +5,9 @@ import { useRouter } from 'next/navigation';
 import TipTapEditor from '@/components/TipTapEditor';
 import Link from 'next/link';
 
-export default function EditPostPage({ params }: { params: Promise<{ id: string }> }) {
+export default function EditPostPage({ params }: { params: { id: string } }) {
   const router = useRouter();
-  const [id, setId] = useState<string | null>(null);
+  const { id } = params;
   const [title, setTitle] = useState('');
   const [slug, setSlug] = useState('');
   const [description, setDescription] = useState('');
@@ -19,15 +19,12 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    params.then((p) => {
-      setId(p.id);
-      if (p.id !== 'new') {
-        fetchPost(p.id);
-      } else {
-        setLoading(false);
-      }
-    });
-  }, []);
+    if (id !== 'new') {
+      fetchPost(id);
+    } else {
+      setLoading(false);
+    }
+  }, [id]);
 
   const fetchPost = async (postId: string) => {
     try {
