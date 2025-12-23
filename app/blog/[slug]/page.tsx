@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getPostBySlug, getAllPosts } from '@/lib/mockBlogData';
+import Navigation from '@/components/Navigation';
 
 export async function generateStaticParams() {
   const posts = getAllPosts();
@@ -9,15 +10,18 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = getPostBySlug(params.slug);
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
 
   if (!post) {
     notFound();
   }
 
   return (
-    <main className="min-h-screen bg-background">
+    <>
+      <Navigation />
+      <main className="min-h-screen bg-background">
       {/* Back Button */}
       <div className="pt-24 pb-8 px-4">
         <div className="max-w-3xl mx-auto">
@@ -150,6 +154,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
           </div>
         </div>
       </article>
-    </main>
+      </main>
+    </>
   );
 }

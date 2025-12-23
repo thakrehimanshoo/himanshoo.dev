@@ -1,12 +1,15 @@
 import Link from 'next/link';
 import { getAllPosts, getAllTags } from '@/lib/mockBlogData';
+import Navigation from '@/components/Navigation';
 
 export default function BlogPage() {
   const posts = getAllPosts();
   const tags = getAllTags();
 
   return (
-    <main className="min-h-screen bg-background">
+    <>
+      <Navigation />
+      <main className="min-h-screen bg-background">
       {/* Hero Section */}
       <section className="pt-32 pb-16 px-4">
         <div className="max-w-4xl mx-auto">
@@ -118,6 +121,7 @@ export default function BlogPage() {
           </div>
         </section>
       )}
-    </main>
+      </main>
+    </>
   );
 }
