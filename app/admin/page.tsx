@@ -111,13 +111,13 @@ export default function AdminDashboard() {
             <div className="flex items-center gap-4">
               <Link
                 href="/"
-                className="text-sm text-foreground/60 hover:text-accent transition-colors"
+                className="text-sm text-foreground/60 hover:text-accent transition-all duration-300 ease-in-out transform hover:scale-105"
               >
                 View Site
               </Link>
               <button
                 onClick={() => signOut({ callbackUrl: '/' })}
-                className="text-sm text-foreground/60 hover:text-red-500 transition-colors"
+                className="text-sm text-foreground/60 hover:text-red-500 transition-all duration-300 ease-in-out transform hover:scale-105"
               >
                 Sign Out
               </button>
@@ -142,7 +142,7 @@ export default function AdminDashboard() {
           </h2>
           <Link
             href="/admin/posts/new"
-            className="bg-accent hover:bg-accent/90 text-white font-medium py-2 px-4 rounded-md transition-colors"
+            className="bg-accent hover:bg-accent/90 text-white font-medium py-2 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg"
           >
             + New Post
           </Link>
@@ -154,7 +154,7 @@ export default function AdminDashboard() {
             <p className="text-foreground/50 mb-4">No posts yet</p>
             <Link
               href="/admin/posts/new"
-              className="inline-block bg-accent hover:bg-accent/90 text-white font-medium py-2 px-4 rounded-md transition-colors"
+              className="inline-block bg-accent hover:bg-accent/90 text-white font-medium py-2 px-4 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg"
             >
               Create Your First Post
             </Link>
@@ -164,7 +164,7 @@ export default function AdminDashboard() {
             {posts.map((post) => (
               <div
                 key={post.id}
-                className="bg-card-bg border border-foreground/10 rounded-lg p-6 hover:border-accent/50 transition-colors"
+                className="bg-card-bg border border-foreground/10 rounded-lg p-6 hover:border-accent/50 transition-all duration-300 ease-in-out hover:shadow-lg hover:-translate-y-1"
               >
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
@@ -199,20 +199,20 @@ export default function AdminDashboard() {
                   <div className="flex items-center gap-2 ml-4">
                     <button
                       onClick={() => togglePublish(post)}
-                      className="px-3 py-1.5 text-sm border border-foreground/10 rounded hover:bg-foreground/5 transition-colors"
+                      className="px-3 py-1.5 text-sm border border-foreground/10 rounded hover:bg-foreground/5 transition-all duration-300 ease-in-out transform hover:scale-105"
                     >
                       {post.published ? 'Unpublish' : 'Publish'}
                     </button>
                     <Link
                       href={`/admin/posts/${post.id}`}
-                      className="px-3 py-1.5 text-sm bg-accent/10 text-accent rounded hover:bg-accent/20 transition-colors"
+                      className="px-3 py-1.5 text-sm bg-accent/10 text-accent rounded hover:bg-accent/20 transition-all duration-300 ease-in-out transform hover:scale-105"
                     >
                       Edit
                     </Link>
                     <button
                       onClick={() => handleDelete(post.id)}
                       disabled={deleting === post.id}
-                      className="px-3 py-1.5 text-sm text-red-600 dark:text-red-400 hover:bg-red-500/10 rounded transition-colors disabled:opacity-50"
+                      className="px-3 py-1.5 text-sm text-red-600 dark:text-red-400 hover:bg-red-500/10 rounded transition-all duration-300 ease-in-out transform hover:scale-105 disabled:opacity-50 disabled:hover:scale-100"
                     >
                       {deleting === post.id ? 'Deleting...' : 'Delete'}
                     </button>

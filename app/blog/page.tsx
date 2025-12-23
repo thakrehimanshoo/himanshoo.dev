@@ -43,13 +43,13 @@ export default async function BlogPage() {
       <section className="pb-8 px-4">
         <div className="max-w-4xl mx-auto">
           <div className="flex flex-wrap gap-2">
-            <button className="px-3 py-1 text-sm rounded-md bg-accent/20 text-accent hover:bg-accent/30 transition-colors">
+            <button className="px-3 py-1 text-sm rounded-md bg-accent/20 text-accent hover:bg-accent/30 transition-all duration-300 ease-in-out transform hover:scale-105">
               All Posts
             </button>
             {tags.map(tag => (
               <button
                 key={tag}
-                className="px-3 py-1 text-sm rounded-md bg-foreground/5 hover:bg-foreground/10 transition-colors"
+                className="px-3 py-1 text-sm rounded-md bg-foreground/5 hover:bg-foreground/10 transition-all duration-300 ease-in-out transform hover:scale-105"
               >
                 {tag}
               </button>
@@ -67,11 +67,11 @@ export default async function BlogPage() {
               href={`/blog/${post.slug}`}
               className="block group"
             >
-              <article className="border border-foreground/10 rounded-lg p-6 hover:border-accent/50 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5">
+              <article className="border border-foreground/10 rounded-lg p-6 hover:border-accent/50 transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-accent/5 hover:-translate-y-1">
                 {/* Post Header */}
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex-1">
-                    <h2 className="text-2xl font-semibold mb-2 group-hover:text-accent transition-colors">
+                    <h2 className="text-2xl font-semibold mb-2 group-hover:text-accent transition-colors duration-300">
                       {post.title}
                     </h2>
                     <div className="flex items-center gap-3 text-sm text-foreground/60">
@@ -109,7 +109,7 @@ export default async function BlogPage() {
                 <div className="mt-4 flex items-center text-accent text-sm font-medium">
                   Read article
                   <svg
-                    className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform"
+                    className="ml-2 w-4 h-4 group-hover:translate-x-2 transition-all duration-300 ease-in-out"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"

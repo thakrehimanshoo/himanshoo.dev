@@ -294,13 +294,13 @@ export default function EditPostPage({ params }: { params: { id: string } }) {
               type="submit"
               disabled={saving}
               className="bg-accent hover:bg-accent/90 text-white font-medium py-2 px-6 rounded-md
-                       transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                       transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
             >
               {saving ? 'Saving...' : id === 'new' ? 'Create Post' : 'Save Changes'}
             </button>
             <Link
               href="/admin"
-              className="text-foreground/60 hover:text-accent transition-colors"
+              className="text-foreground/60 hover:text-accent transition-all duration-300 ease-in-out transform hover:scale-105"
             >
               Cancel
             </Link>
