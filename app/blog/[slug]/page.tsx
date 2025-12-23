@@ -5,16 +5,6 @@ import { prisma } from '@/lib/prisma';
 
 export const dynamic = 'force-dynamic';
 
-export async function generateStaticParams() {
-  const posts = await prisma.post.findMany({
-    where: { published: true },
-    select: { slug: true },
-  });
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
-}
-
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
   const { slug } = params;
   const post = await prisma.post.findFirst({
