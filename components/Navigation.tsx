@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useTheme } from './ThemeProvider';
+import Image from "next/image";
 
 export default function Navigation() {
   const [activeSection, setActiveSection] = useState('');
@@ -83,21 +84,34 @@ export default function Navigation() {
 
       {/* Navigation */}
       <nav
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-          scrolled
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${scrolled
             ? 'bg-[var(--background)]/95 backdrop-blur-sm border-b border-[var(--border)] shadow-sm'
             : 'bg-transparent'
-        }`}
+          }`}
       >
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center justify-between h-16">
             {/* Logo/Name */}
-            <a
+            {/* <a
               href="#hero"
               className="text-lg font-medium text-[var(--foreground)] hover:text-[var(--accent)] transition-colors"
             >
               HT
-            </a>
+            </a> */}
+            <a
+  href="#hero"
+  className="flex items-center gap-2 text-lg font-medium text-[var(--foreground)] hover:text-[var(--accent)] transition-colors"
+>
+  <Image
+    src={theme === "dark" ? "/dark.png" : "/logo-light.png"}
+    alt="Himanshoo Thakre Logo"
+    width={32}
+    height={32}
+    className="object-contain transition-opacity"
+    priority
+  />
+</a>
+
 
             {/* Navigation links and theme toggle */}
             <div className="hidden md:flex items-center gap-1">
@@ -105,11 +119,10 @@ export default function Navigation() {
                 <a
                   key={item.id}
                   href={`#${item.id}`}
-                  className={`px-4 py-2 rounded-sm text-sm font-medium transition-all duration-200 ${
-                    activeSection === item.id
+                  className={`px-4 py-2 rounded-sm text-sm font-medium transition-all duration-200 ${activeSection === item.id
                       ? 'text-[var(--accent)] bg-[var(--accent-light)]'
                       : 'text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--accent-light)]/50'
-                  }`}
+                    }`}
                 >
                   {item.label}
                 </a>
@@ -197,11 +210,10 @@ function MobileMenu({ navItems, activeSection }: { navItems: any[]; activeSectio
                 key={item.id}
                 href={`#${item.id}`}
                 onClick={() => setIsOpen(false)}
-                className={`block px-4 py-3 rounded-sm text-sm font-medium transition-all ${
-                  activeSection === item.id
+                className={`block px-4 py-3 rounded-sm text-sm font-medium transition-all ${activeSection === item.id
                     ? 'text-[var(--accent)] bg-[var(--accent-light)]'
                     : 'text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--accent-light)]/50'
-                }`}
+                  }`}
               >
                 {item.label}
               </a>
