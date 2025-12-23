@@ -96,25 +96,19 @@ export default function Navigation() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center justify-between h-16">
             {/* Logo/Name */}
-            {/* <a
-              href="#hero"
-              className="text-lg font-medium text-[var(--foreground)] hover:text-[var(--accent)] transition-colors"
+            <Link
+              href="/#hero"
+              className="flex items-center gap-2 text-lg font-medium text-[var(--foreground)] hover:text-[var(--accent)] transition-colors"
             >
-              HT
-            </a> */}
-            <a
-  href="#hero"
-  className="flex items-center gap-2 text-lg font-medium text-[var(--foreground)] hover:text-[var(--accent)] transition-colors"
->
-  <Image
-    src={theme === "dark" ? "/dark.png" : "/logo-light.png"}
-    alt="Himanshoo Thakre Logo"
-    width={32}
-    height={32}
-    className="object-contain transition-opacity"
-    priority
-  />
-</a>
+              <Image
+                src={theme === "dark" ? "/dark.png" : "/logo-light.png"}
+                alt="Himanshoo Thakre Logo"
+                width={32}
+                height={32}
+                className="object-contain transition-opacity"
+                priority
+              />
+            </Link>
 
 
             {/* Navigation links and theme toggle */}
@@ -124,15 +118,10 @@ export default function Navigation() {
                   ? pathname?.startsWith(item.href)
                   : activeSection === item.id;
 
-                const LinkComponent = item.isRoute ? Link : 'a';
-                const linkProps = item.isRoute
-                  ? { href: item.href }
-                  : { href: `#${item.id}` };
-
                 return (
-                  <LinkComponent
+                  <Link
                     key={item.id}
-                    {...linkProps}
+                    href={item.href}
                     className={`px-4 py-2 rounded-sm text-sm font-medium transition-all duration-200 ${
                       isActive
                         ? 'text-[var(--accent)] bg-[var(--accent-light)]'
@@ -140,7 +129,7 @@ export default function Navigation() {
                     }`}
                   >
                     {item.label}
-                  </LinkComponent>
+                  </Link>
                 );
               })}
 
@@ -226,15 +215,10 @@ function MobileMenu({ navItems, activeSection, pathname }: { navItems: any[]; ac
                 ? pathname?.startsWith(item.href)
                 : activeSection === item.id;
 
-              const LinkComponent = item.isRoute ? Link : 'a';
-              const linkProps = item.isRoute
-                ? { href: item.href }
-                : { href: `#${item.id}` };
-
               return (
-                <LinkComponent
+                <Link
                   key={item.id}
-                  {...linkProps}
+                  href={item.href}
                   onClick={() => setIsOpen(false)}
                   className={`block px-4 py-3 rounded-sm text-sm font-medium transition-all ${
                     isActive
@@ -243,7 +227,7 @@ function MobileMenu({ navItems, activeSection, pathname }: { navItems: any[]; ac
                   }`}
                 >
                   {item.label}
-                </LinkComponent>
+                </Link>
               );
             })}
           </div>
