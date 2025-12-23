@@ -9,7 +9,7 @@ const postSchema = z.object({
   slug: z.string().min(1).max(200).optional(),
   description: z.string().min(1).optional(),
   content: z.string().min(1).optional(),
-  tags: z.array(z.string()).optional(),
+  tags: z.string().optional(), // Comma-separated tags
   readingTime: z.string().optional(),
   published: z.boolean().optional(),
   coverImage: z.string().optional(),

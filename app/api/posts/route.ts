@@ -10,7 +10,7 @@ const postSchema = z.object({
   slug: z.string().min(1).max(200),
   description: z.string().min(1),
   content: z.string().min(1),
-  tags: z.array(z.string()),
+  tags: z.string(), // Comma-separated tags
   readingTime: z.string(),
   published: z.boolean().default(false),
   coverImage: z.string().optional(),
@@ -29,7 +29,7 @@ export async function GET(request: Request) {
   }
 
   if (tag) {
-    where.tags = { has: tag };
+    where.tags = { contains: tag };
   }
 
   const posts = await prisma.post.findMany({

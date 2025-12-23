@@ -13,7 +13,7 @@ interface Post {
   published: boolean;
   createdAt: string;
   updatedAt: string;
-  tags: string[];
+  tags: string; // Comma-separated tags
 }
 
 export default function AdminDashboard() {
@@ -177,7 +177,7 @@ export default function AdminDashboard() {
                         Updated: {new Date(post.updatedAt).toLocaleDateString()}
                       </span>
                       <span>•</span>
-                      <span>{post.tags.join(', ')}</span>
+                      <span>{post.tags}</span>
                     </div>
                   </div>
 

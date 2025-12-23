@@ -88,7 +88,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
             {/* Tags */}
             <div className="flex flex-wrap gap-2">
-              {post.tags.map(tag => (
+              {post.tags.split(',').map(t => t.trim()).filter(Boolean).map(tag => (
                 <span
                   key={tag}
                   className="px-3 py-1 text-sm rounded-md bg-foreground/5 text-foreground/70"

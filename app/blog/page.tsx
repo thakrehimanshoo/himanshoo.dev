@@ -17,7 +17,10 @@ export default async function BlogPage() {
 
   // Extract all unique tags
   const allTags = new Set<string>();
-  posts.forEach(post => post.tags.forEach(tag => allTags.add(tag)));
+  posts.forEach(post => {
+    const postTags = post.tags.split(',').map(t => t.trim()).filter(Boolean);
+    postTags.forEach(tag => allTags.add(tag));
+  });
   const tags = Array.from(allTags).sort();
 
   return (
@@ -92,7 +95,7 @@ export default async function BlogPage() {
 
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2">
-                  {post.tags.map(tag => (
+                  {post.tags.split(',').map(t => t.trim()).filter(Boolean).map(tag => (
                     <span
                       key={tag}
                       className="px-2 py-1 text-xs rounded bg-foreground/5 text-foreground/70"

@@ -38,7 +38,7 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
         setSlug(post.slug);
         setDescription(post.description);
         setContent(post.content);
-        setTags(post.tags.join(', '));
+        setTags(post.tags);
         setReadingTime(post.readingTime);
         setPublished(post.published);
       }
@@ -58,7 +58,7 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
       slug,
       description,
       content,
-      tags: tags.split(',').map(t => t.trim()).filter(Boolean),
+      tags: tags.split(',').map(t => t.trim()).filter(Boolean).join(','),
       readingTime,
       published,
     };

@@ -6,7 +6,8 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
 model User {
@@ -25,11 +26,11 @@ model Post {
   slug        String   @unique
   title       String
   description String
-  content     String   @db.Text
+  content     String
   published   Boolean  @default(false)
   author      User     @relation(fields: [authorId], references: [id])
   authorId    String
-  tags        String[]
+  tags        String   // Stored as comma-separated values
   readingTime String
   coverImage  String?
   createdAt   DateTime @default(now())

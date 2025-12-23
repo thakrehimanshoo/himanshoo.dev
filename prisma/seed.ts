@@ -62,7 +62,7 @@ async function main() {
           <li>Memory management is critical for scalability</li>
         </ul>
       `,
-      tags: ['systems', 'C', 'operating-systems', 'concurrency'],
+      tags: 'systems,C,operating-systems,concurrency',
       readingTime: '8 min read',
       published: true,
       authorId: admin.id,
@@ -109,7 +109,7 @@ async function main() {
         <h2>What I'd Do Differently</h2>
         <p>If I were to rebuild this today, I'd use a managed scraping service like ScrapingBee for better reliability and focus more on the user experience.</p>
       `,
-      tags: ['python', 'web-scraping', 'architecture', 'redis'],
+      tags: 'python,web-scraping,architecture,redis',
       readingTime: '10 min read',
       published: true,
       authorId: admin.id,
@@ -173,7 +173,7 @@ CREATE TABLE applications (
         <h2>Conclusion</h2>
         <p>For most web applications with relational data, PostgreSQL is the pragmatic choice. Don't let the NoSQL hype influence you—choose based on your actual requirements.</p>
       `,
-      tags: ['databases', 'postgresql', 'mongodb', 'architecture'],
+      tags: 'databases,postgresql,mongodb,architecture',
       readingTime: '7 min read',
       published: true,
       authorId: admin.id,
