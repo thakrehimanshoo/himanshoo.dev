@@ -3,12 +3,15 @@
 import { useState, useEffect } from 'react';
 import { useTheme } from './ThemeProvider';
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Navigation() {
   const [activeSection, setActiveSection] = useState('');
   const [scrolled, setScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const { theme, toggleTheme } = useTheme();
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -64,10 +67,11 @@ export default function Navigation() {
   }, []);
 
   const navItems = [
-    { id: 'hero', label: 'Home' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'experience', label: 'Experience' },
-    { id: 'contact', label: 'Contact' },
+    { id: 'hero', label: 'Home', href: '/#hero' },
+    { id: 'projects', label: 'Projects', href: '/#projects' },
+    { id: 'blog', label: 'Blog', href: '/blog', isRoute: true },
+    { id: 'experience', label: 'Experience', href: '/#experience' },
+    { id: 'contact', label: 'Contact', href: '/#contact' },
   ];
 
   return (
@@ -115,18 +119,30 @@ export default function Navigation() {
 
             {/* Navigation links and theme toggle */}
             <div className="hidden md:flex items-center gap-1">
-              {navItems.map((item) => (
-                <a
-                  key={item.id}
-                  href={`#${item.id}`}
-                  className={`px-4 py-2 rounded-sm text-sm font-medium transition-all duration-200 ${activeSection === item.id
-                      ? 'text-[var(--accent)] bg-[var(--accent-light)]'
-                      : 'text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--accent-light)]/50'
+              {navItems.map((item) => {
+                const isActive = item.isRoute
+                  ? pathname?.startsWith(item.href)
+                  : activeSection === item.id;
+
+                const LinkComponent = item.isRoute ? Link : 'a';
+                const linkProps = item.isRoute
+                  ? { href: item.href }
+                  : { href: `#${item.id}` };
+
+                return (
+                  <LinkComponent
+                    key={item.id}
+                    {...linkProps}
+                    className={`px-4 py-2 rounded-sm text-sm font-medium transition-all duration-200 ${
+                      isActive
+                        ? 'text-[var(--accent)] bg-[var(--accent-light)]'
+                        : 'text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--accent-light)]/50'
                     }`}
-                >
-                  {item.label}
-                </a>
-              ))}
+                  >
+                    {item.label}
+                  </LinkComponent>
+                );
+              })}
 
               {/* Dark mode toggle */}
               <button
@@ -165,7 +181,7 @@ export default function Navigation() {
                   </svg>
                 )}
               </button>
-              <MobileMenu navItems={navItems} activeSection={activeSection} />
+              <MobileMenu navItems={navItems} activeSection={activeSection} pathname={pathname} />
             </div>
           </div>
         </div>
@@ -174,7 +190,7 @@ export default function Navigation() {
   );
 }
 
-function MobileMenu({ navItems, activeSection }: { navItems: any[]; activeSection: string }) {
+function MobileMenu({ navItems, activeSection, pathname }: { navItems: any[]; activeSection: string; pathname: string | null }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -205,19 +221,31 @@ function MobileMenu({ navItems, activeSection }: { navItems: any[]; activeSectio
       {isOpen && (
         <div className="absolute top-16 left-0 right-0 bg-[var(--card-bg)] border-b border-[var(--border)] shadow-lg">
           <div className="px-4 py-2 space-y-1">
-            {navItems.map((item) => (
-              <a
-                key={item.id}
-                href={`#${item.id}`}
-                onClick={() => setIsOpen(false)}
-                className={`block px-4 py-3 rounded-sm text-sm font-medium transition-all ${activeSection === item.id
-                    ? 'text-[var(--accent)] bg-[var(--accent-light)]'
-                    : 'text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--accent-light)]/50'
+            {navItems.map((item) => {
+              const isActive = item.isRoute
+                ? pathname?.startsWith(item.href)
+                : activeSection === item.id;
+
+              const LinkComponent = item.isRoute ? Link : 'a';
+              const linkProps = item.isRoute
+                ? { href: item.href }
+                : { href: `#${item.id}` };
+
+              return (
+                <LinkComponent
+                  key={item.id}
+                  {...linkProps}
+                  onClick={() => setIsOpen(false)}
+                  className={`block px-4 py-3 rounded-sm text-sm font-medium transition-all ${
+                    isActive
+                      ? 'text-[var(--accent)] bg-[var(--accent-light)]'
+                      : 'text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--accent-light)]/50'
                   }`}
-              >
-                {item.label}
-              </a>
-            ))}
+                >
+                  {item.label}
+                </LinkComponent>
+              );
+            })}
           </div>
         </div>
       )}
