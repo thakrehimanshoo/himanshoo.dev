@@ -1,10 +1,15 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { getPostBySlug, getAllPosts } from '@/lib/mockBlogData';
 import Navigation from '@/components/Navigation';
+import { prisma } from '@/lib/prisma';
+
+export const dynamic = 'force-dynamic';
 
 export async function generateStaticParams() {
-  const posts = getAllPosts();
+  const posts = await prisma.post.findMany({
+    where: { published: true },
+    select: { slug: true },
+  });
   return posts.map((post) => ({
     slug: post.slug,
   }));
@@ -12,7 +17,17 @@ export async function generateStaticParams() {
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await prisma.post.findFirst({
+    where: {
+      slug,
+      published: true,
+    },
+    include: {
+      author: {
+        select: { name: true },
+      },
+    },
+  });
 
   if (!post) {
     notFound();
@@ -58,10 +73,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
             {/* Meta */}
             <div className="flex flex-wrap items-center gap-3 text-foreground/60 mb-4">
-              <span>{post.author}</span>
+              <span>{post.author.name || 'Anonymous'}</span>
               <span>•</span>
-              <time dateTime={post.date}>
-                {new Date(post.date).toLocaleDateString('en-US', {
+              <time dateTime={post.createdAt.toString()}>
+                {new Date(post.createdAt).toLocaleDateString('en-US', {
                   year: 'numeric',
                   month: 'long',
                   day: 'numeric'

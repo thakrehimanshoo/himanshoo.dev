@@ -1,10 +1,24 @@
 import Link from 'next/link';
-import { getAllPosts, getAllTags } from '@/lib/mockBlogData';
 import Navigation from '@/components/Navigation';
+import { prisma } from '@/lib/prisma';
 
-export default function BlogPage() {
-  const posts = getAllPosts();
-  const tags = getAllTags();
+export const dynamic = 'force-dynamic';
+
+export default async function BlogPage() {
+  const posts = await prisma.post.findMany({
+    where: { published: true },
+    orderBy: { createdAt: 'desc' },
+    include: {
+      author: {
+        select: { name: true },
+      },
+    },
+  });
+
+  // Extract all unique tags
+  const allTags = new Set<string>();
+  posts.forEach(post => post.tags.forEach(tag => allTags.add(tag)));
+  const tags = Array.from(allTags).sort();
 
   return (
     <>
@@ -58,8 +72,8 @@ export default function BlogPage() {
                       {post.title}
                     </h2>
                     <div className="flex items-center gap-3 text-sm text-foreground/60">
-                      <time dateTime={post.date}>
-                        {new Date(post.date).toLocaleDateString('en-US', {
+                      <time dateTime={post.createdAt.toString()}>
+                        {new Date(post.createdAt).toLocaleDateString('en-US', {
                           year: 'numeric',
                           month: 'long',
                           day: 'numeric'
