@@ -29,7 +29,7 @@ export default function TipTapEditor({ content, onChange }: TipTapEditorProps) {
     },
     editorProps: {
       attributes: {
-        class: 'prose prose-lg max-w-none focus:outline-none min-h-[400px] p-4',
+        class: 'prose prose-lg max-w-none focus:outline-none min-h-[600px] p-6 text-foreground',
       },
     },
   });
@@ -42,10 +42,10 @@ export default function TipTapEditor({ content, onChange }: TipTapEditorProps) {
     <button
       type="button"
       onClick={onClick}
-      className={`px-3 py-1.5 text-sm rounded transition-colors ${
+      className={`px-3 py-2 text-sm rounded-md font-medium transition-all duration-200 ${
         active
-          ? 'bg-accent text-white'
-          : 'bg-foreground/5 hover:bg-foreground/10 text-foreground'
+          ? 'bg-accent text-white shadow-sm'
+          : 'bg-foreground/5 hover:bg-foreground/10 text-foreground hover:shadow-sm'
       }`}
     >
       {children}
@@ -53,9 +53,9 @@ export default function TipTapEditor({ content, onChange }: TipTapEditorProps) {
   );
 
   return (
-    <div className="border border-foreground/10 rounded-lg overflow-hidden">
+    <div className="border-2 border-foreground/10 rounded-lg overflow-hidden shadow-sm hover:border-foreground/20 transition-colors">
       {/* Toolbar */}
-      <div className="bg-card-bg border-b border-foreground/10 p-2 flex flex-wrap gap-2">
+      <div className="bg-card-bg border-b-2 border-foreground/10 p-3 flex flex-wrap gap-2">
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleBold().run()}
           active={editor.isActive('bold')}
@@ -147,8 +147,13 @@ export default function TipTapEditor({ content, onChange }: TipTapEditorProps) {
       </div>
 
       {/* Editor */}
-      <div className="bg-background">
-        <EditorContent editor={editor} />
+      <div className="bg-card-bg">
+        <EditorContent
+          editor={editor}
+          className="prose-headings:text-foreground prose-p:text-foreground prose-strong:text-foreground
+                     prose-code:text-accent prose-code:bg-foreground/5 prose-a:text-accent
+                     prose-li:text-foreground prose-blockquote:text-foreground/70"
+        />
       </div>
     </div>
   );
