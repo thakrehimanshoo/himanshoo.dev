@@ -3,6 +3,7 @@ import { Suspense } from 'react';
 import Navigation from '@/components/Navigation';
 import { prisma } from '@/lib/prisma';
 import BlogPostCardSkeleton from '@/components/skeletons/BlogPostCardSkeleton';
+import { formatDateTime } from '@/lib/dateUtils';
 
 export const dynamic = 'force-dynamic';
 
@@ -47,11 +48,7 @@ async function BlogPostsList() {
                   </h2>
                   <div className="flex items-center gap-3 text-sm text-foreground/60">
                     <time dateTime={post.createdAt.toString()}>
-                      {new Date(post.createdAt).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                      })}
+                      {formatDateTime(post.createdAt)}
                     </time>
                     <span>•</span>
                     <span>{post.readingTime}</span>

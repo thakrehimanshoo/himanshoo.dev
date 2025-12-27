@@ -214,9 +214,10 @@ export default function EditPostPage({ params }: { params: { id: string } }) {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows={3}
-              className="w-full px-4 py-2 bg-card-bg border border-foreground/10 rounded-md
+              className="w-full px-4 py-3 bg-card-bg border border-foreground/10 rounded-md
                        text-foreground placeholder-foreground/40
-                       focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+                       focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent
+                       resize-y min-h-[80px]"
               placeholder="Brief description for the post card"
               required
             />
