@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Navigation from '@/components/Navigation';
 import { prisma } from '@/lib/prisma';
 import BlogPostSkeleton from '@/components/skeletons/BlogPostSkeleton';
+import { formatDateTime, wasEdited } from '@/lib/dateUtils';
 
 export const dynamic = 'force-dynamic';
 
@@ -65,12 +66,16 @@ async function BlogPostContent({ slug }: { slug: string }) {
               <span>{post.author.name || 'Anonymous'}</span>
               <span>•</span>
               <time dateTime={post.createdAt.toString()}>
-                {new Date(post.createdAt).toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric'
-                })}
+                {formatDateTime(post.createdAt)}
               </time>
+              {wasEdited(post.createdAt, post.updatedAt) && (
+                <>
+                  <span>•</span>
+                  <span className="text-foreground/50 italic text-sm">
+                    Edited {formatDateTime(post.updatedAt)}
+                  </span>
+                </>
+              )}
               <span>•</span>
               <span>{post.readingTime}</span>
             </div>
