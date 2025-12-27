@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useSession, signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import AdminPostListSkeleton from '@/components/skeletons/AdminPostListSkeleton';
 
 interface Post {
   id: string;
@@ -87,11 +88,7 @@ export default function AdminDashboard() {
   };
 
   if (status === 'loading' || loading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-foreground">Loading...</div>
-      </div>
-    );
+    return <AdminPostListSkeleton />;
   }
 
   return (

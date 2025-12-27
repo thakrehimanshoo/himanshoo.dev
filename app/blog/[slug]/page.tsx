@@ -1,12 +1,13 @@
 import { notFound } from 'next/navigation';
+import { Suspense } from 'react';
 import Link from 'next/link';
 import Navigation from '@/components/Navigation';
 import { prisma } from '@/lib/prisma';
+import BlogPostSkeleton from '@/components/skeletons/BlogPostSkeleton';
 
 export const dynamic = 'force-dynamic';
 
-export default async function BlogPostPage({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+async function BlogPostContent({ slug }: { slug: string }) {
   const post = await prisma.post.findFirst({
     where: {
       slug,
@@ -24,9 +25,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
   }
 
   return (
-    <>
-      <Navigation />
-      <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background">
       {/* Back Button */}
       <div className="pt-24 pb-8 px-4">
         <div className="max-w-3xl mx-auto">
@@ -159,7 +158,19 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
           </div>
         </div>
       </article>
-      </main>
+    </main>
+  );
+}
+
+export default function BlogPostPage({ params }: { params: { slug: string } }) {
+  const { slug } = params;
+
+  return (
+    <>
+      <Navigation />
+      <Suspense fallback={<BlogPostSkeleton />}>
+        <BlogPostContent slug={slug} />
+      </Suspense>
     </>
   );
 }
