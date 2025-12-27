@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import TipTapEditor from '@/components/TipTapEditor';
 import Link from 'next/link';
+import EditPostFormSkeleton from '@/components/skeletons/EditPostFormSkeleton';
 
 export default function EditPostPage({ params }: { params: { id: string } }) {
   const router = useRouter();
@@ -132,11 +133,7 @@ export default function EditPostPage({ params }: { params: { id: string } }) {
   };
 
   if (loading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-foreground">Loading...</div>
-      </div>
-    );
+    return <EditPostFormSkeleton />;
   }
 
   return (
